@@ -1,6 +1,6 @@
-# Loom Transcript Scraper
+# Loom Transcript Scraper/Custom Data Base Tool
 
-An automated tool to extract transcripts and titles from Loom videos and save them to Google Docs.
+An automated tool to extract transcripts and titles from Loom videos and save them to Google Docs for use with Notebook LM and other LLMs.
 
 ## Features
 
