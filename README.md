@@ -129,12 +129,36 @@ Transcript:
 - Includes timestamps and detailed error information
 - Helps track progress and debug issues
 
-## Known Limitations
+## Advanced Features
 
-- Requires Chrome browser
-- Must have valid Loom login credentials
-- Network-dependent operation
-- Rate limiting may apply for large numbers of videos
+## Progress Tracking
+- Automatic progress saving after each video
+- Resume capability from last processed video
+- Progress stored in `progress.txt`
+- Error recovery and restart support
+
+## Multi-Document Support
+- Automatic distribution across multiple Google Docs
+- Configurable document rotation (default: every 144 videos)
+- Separate document IDs for different video ranges
+- Prevents single document size limitations
+
+## Scroll Management
+- Dynamic video loading through automatic scrolling
+- Configurable maximum scroll attempts
+- Handles Loom's infinite scroll interface
+- Ensures all videos are accessible
+
+## Environmental Variables
+```bash
+# Required .env configurations
+LOOM_EMAIL="your-email"
+LOOM_PASSWORD="your-password"
+GOOGLE_DOC_ID_1="first-doc-id"
+GOOGLE_DOC_ID_2="second-doc-id"
+GOOGLE_DOC_ID_3="third-doc-id"
+GOOGLE_CREDENTIALS_PATH="credentials/google-credentials.json"
+```
 
 ## Troubleshooting
 
@@ -148,10 +172,31 @@ Transcript:
    - Verify document ID
    - Ensure API access is enabled
 
-## Contributing
+# Technical Implementation
 
-[Add your contribution guidelines here]
+## Playwright Integration
+- Utilizes Playwright for robust browser automation
+- Handles dynamic content loading and interactions
+- Manages element selection and state management
+- Provides reliable automation across browser sessions
 
-## License
+Key Playwright features used:
+```python
+# Browser initialization
+browser = p.chromium.launch(headless=False)
+page = browser.new_page()
 
-[Add your chosen license here]
+# Element selection and interaction
+page.wait_for_selector('input[type="email"]')
+page.wait_for_load_state('networkidle')
+
+# Dynamic content handling
+page.query_selector_all('a[href*="/share/"]')
+page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+```
+
+## Additional Technologies
+- Python for core functionality
+- Google Docs API for content storage
+- Logging for operation tracking
+- Environment variables for configuration
