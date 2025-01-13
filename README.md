@@ -51,17 +51,38 @@ loom-scraper/
     └── google-credentials.json
 ```
 
-## Configuration
+## Security & Configuration
 
-1. Create a `.env` file with the following content:
+### Important Security Notes
+- Never commit your `.env` file or Google credentials to GitHub
+- Keep your Google Cloud credentials secure and private
+- Regularly rotate your credentials for better security
+- Add both `.env` and `credentials/` to your `.gitignore` file
+
+### Configuration Steps
+1. Create a `.env` file with the following structure:
 ```
+# This is just a template - do not commit the actual .env file!
 LOOM_EMAIL="your-email"
 LOOM_PASSWORD="your-password"
 GOOGLE_DOC_ID="your-google-doc-id"
 GOOGLE_CREDENTIALS_PATH="credentials/google-credentials.json"
 ```
 
-2. Place your Google Cloud credentials JSON file in the `credentials` folder
+2. Set up your .gitignore:
+```
+# Add to .gitignore
+.env
+credentials/
+logs/
+__pycache__/
+*.pyc
+```
+
+3. Create a `credentials` folder and place your Google Cloud credentials JSON file there
+   - Keep this file secure and private
+   - Never share or commit this file
+   - Consider using environment variables in production
 
 ## Usage
 
@@ -133,4 +154,4 @@ Transcript:
 
 ## License
 
-[Add your chosen license here]# LoomTranscriptScraper
+[Add your chosen license here]
