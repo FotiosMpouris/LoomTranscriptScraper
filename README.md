@@ -1,6 +1,6 @@
-# Loom Transcript Scraper/Custom Data Base Tool
+# Loom Transcript Scraper
 
-An automated tool to extract transcripts and titles from Loom videos and save them to Google Docs for use with Notebook LM and other LLMs.
+An automated tool to extract transcripts and titles from Loom videos and save them to Google Docs.
 
 ## Features
 
@@ -116,12 +116,35 @@ Transcript:
 ---
 ```
 
-## Error Handling
+## Browser Configuration
 
-- The script includes comprehensive error handling for network issues
-- Progress is saved after each video
-- Detailed logging for troubleshooting
-- Automatic retries for common failures
+### Playwright Browser Options
+- Default: Chrome/Chromium browser in non-headless mode
+- Configurable user agent strings to prevent automation detection
+- Support for multiple browser types:
+  ```python
+  # Chrome/Chromium (default)
+  browser = p.chromium.launch(headless=False)
+  
+  # Firefox
+  browser = p.firefox.launch(headless=False)
+  
+  # Webkit (Safari)
+  browser = p.webkit.launch(headless=False)
+  ```
+
+### User Agent Configuration
+- Custom user agents can be configured to avoid scraping detection
+- Supports multiple browser identities
+- Example configuration:
+  ```python
+  context = browser.new_context(
+      user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  )
+  page = context.new_page()
+  ```
+
+This flexibility helps prevent automation detection while maintaining stable operation.
 
 ## Logging
 
